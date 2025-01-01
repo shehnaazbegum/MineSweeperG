@@ -1,0 +1,47 @@
+import tkinter as tk
+from Game import MineWindow
+def start_game(level):
+    if level=="Beginner":
+        title="BEGINNER (10 mines)"
+        no_of_cells=10
+        side=300
+        no_of_mines=10
+    elif level=="Intermediate":
+        title="INTERMEDIATE (30 mines)"
+        no_of_cells=15
+        side=450
+        no_of_mines=30
+    elif level=="Advanced":
+        title="ADVANCED (50 mines)"
+        no_of_cells=20
+        side=600
+        no_of_mines=50
+    height=side+40
+    screen_width=root.winfo_screenwidth()
+    screen_height=root.winfo_screenheight()
+    top_position=int(screen_height/2-height/2)
+    right_position=int(screen_width/2-side/2)
+    root.withdraw()
+    MineWindow(title,no_of_cells,side,no_of_mines,height,right_position,top_position,return_to_menu)
+def return_to_menu():
+    root.deiconify()
+def on_exit():
+    root.destroy()
+root=tk.Tk()
+window_width=320
+window_height=200
+screen_width=root.winfo_screenwidth()
+screen_height=root.winfo_screenheight()
+position_top=int(screen_height/2-window_height/2)
+position_right=int(screen_width/2-window_width/2)
+root.title("Main Menu")
+root.geometry(f'{window_width}x{window_height}+{position_right}+{position_top}')
+button_beginner = tk.Button(root,text="Beginner",command=lambda:start_game("Beginner"))
+button_beginner.pack(pady=10)
+button_intermediate = tk.Button(root,text="Intermediate",command=lambda:start_game("Intermediate"))
+button_intermediate.pack(pady=10)
+button_advanced = tk.Button(root,text="Advanced",command=lambda:start_game("Advanced"))
+button_advanced.pack(pady=10)
+button_exit = tk.Button(root,text="Exit",command=on_exit)
+button_exit.pack(pady=10)
+root.mainloop()
